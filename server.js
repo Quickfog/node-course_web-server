@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3809;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -12,7 +13,7 @@ app.use((req, res, next) => {
   var log = `${now}: ${req.method} ${req.url}`;
 
   console.log(log);
-  fs.appendFile('server.log', log + '\n');
+  fs.appendFileSync('server.log', log + '\n');
   next();
 });
 
@@ -29,7 +30,7 @@ hbs.registerHelper('screamIt', (text) => {
 app.get('/', (req, res) => {
   res.render('home.hbs', {
     pageTitle: 'Home page',
-    welcomeMessage: 'Welcome to my first try at building an express homepage'
+    welcomeMessage: 'Welcome to an express homepage'
   });
 });
 
@@ -46,6 +47,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3809, () => {
-  console.log('Server is up on port 3809');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
