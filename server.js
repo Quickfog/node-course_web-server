@@ -35,9 +35,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  // res.send('about page');
   res.render('about.hbs', {
     pageTitle: 'About page'
+  });
+});
+
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
   });
 });
 
